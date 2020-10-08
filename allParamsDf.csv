@@ -1,0 +1,6 @@
+,Usage,Segment,Nb vehicules,Distance jour,Jours / année,Charge utile au départ kg,Conduite,Type de route,Adresse départ (optionnel),Zone de vitesse - ville,Zone de vitesse - hors ville,Trafic,Relief
+0,Livraison particulier,Fourgon petit,1,250,250,200,Dynamique,Majoritairement ville,"75001, Paris",Majoritairement 30,Essentiellement 90,Mixte,Plat
+1,Livraison professionnelle,Fourgon petit,1,200,250,500,Normale,Mixte,"75001, Paris",Majoritairement 30,Majoritairement 90,Majoritairement fluide,Plat
+2,Agent commercial,Berline,1,400,200,0,Normale,Majoritairement hors ville,"75001, Paris",Mixte,Mixte,Majoritairement fluide,Plat
+3,Technicien,Fourgon petit,1,150,230,100,Dynamique,Mixte,"75001, Paris",Mixte,Majoritairement 90,Majoritairement fluide,Plat
+4,Voiture de fonction,Berline,1,80,200,0,Normale,Majoritairement ville,"75001, Paris",Mixte,Mixte,Mixte,Plat

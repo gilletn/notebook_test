@@ -15,27 +15,20 @@ class WS:
       self.headers = {
           "Content-Type": "application/json",
           "Accept": "application/json"}
-
-      if os.getenv('MOBICLOUD_URL',None) is None:
-         # local env
-         self.urlbase = "http://127.0.0.1:8000/service/"
-         self.proxies = {"http": None, "https": None}
+      mobicloudUrl = 'https://mobicloud.ifpen.com'
+      url = mobicloudUrl+'/api/authenticate'
+      login = getpass.getpass("Mobicloud login (%s):"%mobicloudUrl)
+      password = getpass.getpass("Mobicloud password :")
+      data = {"password": password, "rememberMe": True, "username": login}
+      r = requests.post(url, json=data, headers=self.headers, proxies=self.proxies)
+      del login, password, data
+      TOKEN = r.json().get('id_token',None)
+      if TOKEN is None:
+         print('Error during login, try again ...')
       else:
-         # ppmobicloud env
-         mobicloudUrl = os.getenv('MOBICLOUD_URL')
-         url = mobicloudUrl+'/api/authenticate'
-         login = getpass.getpass("Mobicloud login (%s):"%mobicloudUrl)
-         password = getpass.getpass("Mobicloud password :")
-         data = {"password": password, "rememberMe": True, "username": login}
-         r = requests.post(url, json=data, headers=self.headers, proxies=self.proxies)
-         del login, password, data
-         TOKEN = r.json().get('id_token',None)
-         if TOKEN is None:
-            print('Error during login, try again ...')
-         else:
-            print(' => success !')
-            self.headers['Authorization'] = "Bearer "+TOKEN
-         self.urlbase = mobicloudUrl+"/tco/service/"
+         print(' => success !')
+         self.headers['Authorization'] = "Bearer "+TOKEN
+      self.urlbase = mobicloudUrl+"/tco/service/"
 
 # limit the choice of powertrains to compare
 pwtChoice = ['VE', 'VFH_plugin_P2', 'VMH_D', 'VTH_D']
